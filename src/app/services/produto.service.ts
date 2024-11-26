@@ -18,4 +18,8 @@ export class ProdutoService {
     return this.http.post(apiUrl, venda);
   }
   
+ listarVendas(): Observable<any> {
+  const apiUrl = 'http://localhost:8080/comercial/vendas/listar'
+    return this.http.get<any[]>(apiUrl);
+  }
 }

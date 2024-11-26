@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { ProdutoService } from '../services/produto.service';
 
 @Component({
   selector: 'app-grafico',
@@ -7,28 +8,61 @@ import { Chart, registerables } from 'chart.js';
   styleUrls: ['./grafico.page.scss'],
 })
 export class GraficoPage implements AfterViewInit {
-  vendasMensais = [
-    { mes: 'Janeiro', quantidade: 100 },
-    { mes: 'Fevereiro', quantidade: 120 },
-    { mes: 'Março', quantidade: 90 },
-    { mes: 'Abril', quantidade: 110 },
-    { mes: 'Maio', quantidade: 150 },
-    { mes: 'Junho', quantidade: 130 },
-    { mes: 'Julho', quantidade: 140 },
-    { mes: 'Agosto', quantidade: 160 },
-    { mes: 'Setembro', quantidade: 170 },
-    { mes: 'Outubro', quantidade: 180 },
-    { mes: 'Novembro', quantidade: 190 },
-    { mes: 'Dezembro', quantidade: 200 },
-  ];
+  vendasMensais: { mes: string; quantidade: number }[] = [];
 
-  constructor() {
+  constructor(private produtoService: ProdutoService) {
     Chart.register(...registerables);
   }
 
   ngAfterViewInit(): void {
-    this.createLineChart();
-    this.createBarChart();
+    this.carregarDadosVendas();
+  }
+
+  carregarDadosVendas(): void {
+    this.produtoService.listarVendas().subscribe(
+      (response) => {
+        if (response.success) {
+          this.processarDados(response.vendas);
+          this.createLineChart();
+          this.createBarChart();
+        } else {
+          console.error('Erro ao carregar vendas:', response.message);
+        }
+      },
+      (error) => {
+        console.error('Erro ao buscar vendas:', error);
+      }
+    );
+  }
+
+  processarDados(vendas: any[]): void {
+    const meses = [
+      'Janeiro',
+      'Fevereiro',
+      'Março',
+      'Abril',
+      'Maio',
+      'Junho',
+      'Julho',
+      'Agosto',
+      'Setembro',
+      'Outubro',
+      'Novembro',
+      'Dezembro',
+    ];
+
+    const vendasAgrupadas: { [key: string]: number } = {};
+
+    vendas.forEach((venda) => {
+      const data = new Date(venda.dataVenda);
+      const mes = meses[data.getMonth()]; // Obtém o nome do mês
+      vendasAgrupadas[mes] = (vendasAgrupadas[mes] || 0) + venda.qtd;
+    });
+
+    this.vendasMensais = meses.map((mes) => ({
+      mes,
+      quantidade: vendasAgrupadas[mes] || 0,
+    }));
   }
 
   createLineChart(): void {
@@ -63,11 +97,7 @@ export class GraficoPage implements AfterViewInit {
             },
           },
         });
-      } else {
-        console.error('Falha ao obter o contexto do gráfico de linhas.');
       }
-    } else {
-      console.error('Elemento canvas para o gráfico de linhas não encontrado.');
     }
   }
 
@@ -103,11 +133,7 @@ export class GraficoPage implements AfterViewInit {
             },
           },
         });
-      } else {
-        console.error('Falha ao obter o contexto do gráfico de barras.');
       }
-    } else {
-      console.error('Elemento canvas para o gráfico de barras não encontrado.');
     }
   }
 }

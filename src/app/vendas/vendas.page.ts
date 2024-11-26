@@ -71,7 +71,7 @@ export class VendasPage implements OnInit {
         vlrVenda: item.valor,
       })),
     };
-
+  
     // Envia os dados para o back-end
     this.produtoService.finalizarVenda(venda).subscribe(
       (response) => {
@@ -90,4 +90,5 @@ export class VendasPage implements OnInit {
       }
     );
   }
+  
 }
