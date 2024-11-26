@@ -1,20 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+    <ion-toolbar style="text-align: center;">
+      <strong>Gerenciamento de Vendas</strong>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-button [routerLink]="'/produtos'">Listar Produtos</ion-button>
+    <ion-button [routerLink]="'/vendas'">Realizar Venda</ion-button>
+    <ion-button [routerLink]="'/grafico'">Visualizar Gráficos</ion-button>
   </div>
 </ion-content>

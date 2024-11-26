@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ProdutoService } from '../services/produto.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-grafico',
@@ -10,7 +12,7 @@ import { ProdutoService } from '../services/produto.service';
 export class GraficoPage implements AfterViewInit {
   vendasMensais: { mes: string; quantidade: number }[] = [];
 
-  constructor(private produtoService: ProdutoService) {
+  constructor(private produtoService: ProdutoService, private router: Router) {
     Chart.register(...registerables);
   }
 
@@ -135,5 +137,9 @@ export class GraficoPage implements AfterViewInit {
         });
       }
     }
+  }
+
+  voltarParaHome(): void {
+    this.router.navigate(['/']); // Redireciona para a rota inicial
   }
 }

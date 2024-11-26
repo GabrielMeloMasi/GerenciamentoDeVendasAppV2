@@ -1,9 +1,45 @@
-<div>
-  <h2>Gráfico de Linhas</h2>
-  <canvas id="lineChart"></canvas>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gráficos de Vendas</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<div>
-  <h2>Gráfico de Barras</h2>
-  <canvas id="barChart"></canvas>
-</div>
+<ion-content>
+  <div style="text-align: center; margin: 20px;">
+    <h1>Visão Geral das Vendas</h1>
+    <p>Veja abaixo os gráficos com os dados de vendas mensais.</p>
+  </div>
+
+  <!-- Container dos Gráficos -->
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin: 20px;">
+    <!-- Gráfico de Linhas -->
+    <div style="flex: 1 1 45%; max-width: 500px;">
+      <h3 style="text-align: center;">Gráfico de Linhas</h3>
+      <canvas id="lineChart" style="max-width: 100%; height: auto;"></canvas>
+    </div>
+
+    <!-- Gráfico de Barras -->
+    <div style="flex: 1 1 45%; max-width: 500px;">
+      <h3 style="text-align: center;">Gráfico de Barras</h3>
+      <canvas id="barChart" style="max-width: 100%; height: auto;"></canvas>
+    </div>
+  </div>
+
+  <!-- Botão Voltar -->
+  <div style="text-align: center; margin: 20px;">
+    <button
+      style="
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      "
+      (click)="voltarParaHome()"
+    >
+      Voltar para Home
+    </button>
+  </div>
+</ion-content>
