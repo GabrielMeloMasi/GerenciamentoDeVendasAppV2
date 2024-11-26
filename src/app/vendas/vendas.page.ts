@@ -10,7 +10,7 @@ export class VendasPage implements OnInit {
   produtos: any[] = []; // Lista de produtos disponíveis
   carrinho: any[] = []; // Lista de produtos no carrinho
   total: number = 0; // Valor total da venda
-  dataVenda: string = new Date().toISOString(); // Data da venda
+  dataVenda: string = new Date().toISOString(); // Data da venda inicializada com a data atual
 
   constructor(private produtoService: ProdutoService) {}
 
@@ -62,7 +62,7 @@ export class VendasPage implements OnInit {
   finalizarVenda() {
     // Monta o objeto de venda
     const venda = {
-      dataVenda: this.dataVenda,
+      dataVenda: this.dataVenda, // Data escolhida pelo usuário
       qtd: this.carrinho.length,
       vlrTotal: this.total,
       produtos: this.carrinho.map((item) => ({

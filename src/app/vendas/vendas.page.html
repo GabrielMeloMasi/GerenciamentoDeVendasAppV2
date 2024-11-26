@@ -7,6 +7,20 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
+      <ion-card-title>Data da Venda</ion-card-title>
+    </ion-card-header>
+    <ion-item>
+      <ion-label position="stacked">Selecione a Data</ion-label>
+      <ion-datetime
+        display-format="DD/MM/YYYY HH:mm"
+        picker-format="DD/MM/YYYY HH:mm"
+        [(ngModel)]="dataVenda">
+      </ion-datetime>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
       <ion-card-title>Produtos Disponíveis</ion-card-title>
     </ion-card-header>
     <ion-list>
