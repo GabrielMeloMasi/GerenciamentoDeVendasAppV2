@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lançamento de Vendas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Produtos Disponíveis</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let produto of produtos">
+        <ion-label>
+          <h2>{{ produto.nomeProduto }}</h2>
+          <p>Preço: R$ {{ produto.precoVenda }}</p>
+        </ion-label>
+        <ion-button slot="end" (click)="adicionarAoCarrinho(produto)">Adicionar</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Carrinho</ion-card-title>
+    </ion-card-header>
+    <ion-list>
+      <ion-item *ngFor="let item of carrinho">
+        <ion-label>
+          <h2>{{ item.nome }}</h2>
+          <p>Quantidade: {{ item.quantidade }}</p>
+          <p>Valor: R$ {{ item.valor.toFixed(2) }}</p>
+        </ion-label>
+        <ion-button slot="end" color="danger" (click)="removerDoCarrinho(item)">Remover</ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>Total</h2>
+        <p>R$ {{ total.toFixed(2) }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-button expand="block" color="success" (click)="finalizarVenda()">Finalizar Venda</ion-button>
+</ion-content>

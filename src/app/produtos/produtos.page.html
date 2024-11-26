@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Produtos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="produtos.length > 0; else noData">
+    <ion-item *ngFor="let produto of produtos">
+      <ion-label>
+        <h2>{{ produto.nomeProduto }}</h2>
+        <p>Preço: R$ {{ produto.precoVenda }}</p>
+        <p>Fabricante: {{ produto.fabricante?.nomeFantasia }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template #noData>
+    <p style="text-align: center; margin-top: 20px;">Nenhum produto encontrado.</p>
+  </ng-template>
+</ion-content>
